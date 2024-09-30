@@ -1,0 +1,15 @@
+name: goquorum-parser_services
+
+services:
+  goquorum-parser-backend:
+    build:
+      context: "."
+      dockerfile: "./Dockerfile"
+    pull_policy: never
+    container_name: backend
+    environment:
+      - SERVICE_NAME=backend
+
+networks:
+  default:
+    name: goquorum-parser-network
