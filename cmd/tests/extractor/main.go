@@ -32,8 +32,8 @@ func testExtractor() {
 
 	ex.SetChannel(logs)
 	ex.SetConnectionOptions(
-		"",
-		"",
+		"http://localhost:8545",
+		"ws://localhost:8546",
 	)
 	ex.SetConnectionPolicy(
 		ethereumextractor.ConnectionPolicy{

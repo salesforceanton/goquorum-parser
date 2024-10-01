@@ -2,14 +2,15 @@ name: goquorum-parser_services
 
 services:
   goquorum-parser-backend:
-    build:
-      context: "."
-      dockerfile: "./Dockerfile"
+    image: goquorum-parser-services:latest
     pull_policy: never
     container_name: backend
     environment:
       - SERVICE_NAME=backend
+    networks:
+      - quorum-dev-quickstart
 
 networks:
-  default:
-    name: goquorum-parser-network
+  quorum-dev-quickstart:
+    name: quorum-dev-quickstart
+    external: true

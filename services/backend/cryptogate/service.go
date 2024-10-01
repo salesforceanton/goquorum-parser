@@ -88,8 +88,8 @@ func New(
 		Slug:   cryptogate.NetworkSlugGoQuorum,
 		Status: cryptogate.NetworkStatusActive,
 		Settings: cryptogate.NetworkSettings{
-			RPCUrlHttp: "",
-			RPCUrlWs:   "",
+			RPCUrlHttp: rpcURLs[cryptogate.TypeConnectionHTTP],
+			RPCUrlWs:   rpcURLs[cryptogate.TypeConnectionWS],
 		},
 	}
 

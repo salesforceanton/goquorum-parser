@@ -3,31 +3,35 @@ services:
   ##############################################
   # Transport (NATS)
   ##############################################
-  goquorum-parser_nats:
+  goquorum-parser-nats:
     image: nats:2.10.14-alpine
-    container_name: nats
+    container_name: goquorum-parser-nats
     ports:
       - "4223:4222"
       # localhost:8223 - NATS management
       - "8223:8222"
     command:
       [ "-js", "--http_port", "8222" ]
+    networks:
+      - quorum-dev-quickstart
 
   ##############################################
   # Databases (Postgres instances)
   ##############################################
-  goquorum-parser_database:
+  goquorum-parser-database:
     image: postgres:15-alpine
-    container_name: database
+    container_name: goquorum-parser-database
     ports:
-      - "5443:5432"
+      - "5444:5432"
     volumes: 
       - goquorum-parser-postgres:/var/lib/postgresql/data
       - ./postgresql:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_USER=goquorum-parser_user
-      - POSTGRES_PASSWORD=goquorum-parser_pass
-      - POSTGRES_MULTIPLE_DATABASES=cryptogate_db
+      - POSTGRES_USER=goquorum_parser_user
+      - POSTGRES_PASSWORD=goquorum_parser_pass
+      - POSTGRES_MULTIPLE_DATABASES=backend_db
+    networks:
+      - quorum-dev-quickstart
 
 volumes:
   goquorum-parser-postgres:
@@ -36,5 +40,6 @@ volumes:
       - project=goquorum-parser
 
 networks:
-  default:
-    name: network
+  quorum-dev-quickstart:
+    name: quorum-dev-quickstart
+    external: true

@@ -2,6 +2,7 @@ package ethereumextractor
 
 import (
 	"context"
+	"fmt"
 	"log/slog"
 	"math/big"
 	"net/http"
@@ -161,10 +162,12 @@ func (ex *concreteExtractor) reconnect() error {
 		)
 		if err != nil {
 			ex.close()
+			ex.logger.Error(fmt.Sprintf("error with http connect %s", ex.httpUrl))
 			return err
 		}
 
 		ex.httpClient = ethclient.NewClient(rpcClient)
+		ex.logger.Debug(fmt.Sprintf("successfully connected by http to %s", ex.httpUrl))
 	}
 
 	{
@@ -174,8 +177,10 @@ func (ex *concreteExtractor) reconnect() error {
 		ex.wsClient, err = ethclient.DialContext(ctx, ex.wsUrl)
 		if err != nil {
 			ex.close()
+			ex.logger.Error(fmt.Sprintf("error with websocket connect %s", ex.wsUrl))
 			return err
 		}
+		ex.logger.Debug(fmt.Sprintf("successfully connected by websocket to %s", ex.wsUrl))
 	}
 
 	return nil

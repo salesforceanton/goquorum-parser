@@ -1,7 +1,6 @@
 FROM golang:1.22.2
 
 SHELL ["/bin/bash", "-c"]
-ARG REPOSITORY_TOKEN
 WORKDIR /app
 
 # build cache

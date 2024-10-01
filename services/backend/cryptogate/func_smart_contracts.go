@@ -38,7 +38,7 @@ func (c *Cryptogate) SendTransaction( //nolint:funlen,maintidx,gocyclo
 
 	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
 	if !ok {
-		return cryptogatemessages.SendTransactionResponse{}, errors.New("Invalid public key")
+		return cryptogatemessages.SendTransactionResponse{}, errors.New("invalid public key")
 	}
 
 	var sender common.Address
@@ -218,7 +218,7 @@ func (c *Cryptogate) GetGasLimit(req cryptogatemessages.SendTransactionRequest,
 	if err != nil {
 		c.logger.Error("tools.Provider.EstimateGas", "err", err)
 
-		return 0, errors.New("Execution reverted")
+		return 0, errors.New("execution reverted")
 	}
 
 	return gasLimit, nil
