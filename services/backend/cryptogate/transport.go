@@ -1,9 +1,11 @@
 package cryptogate
 
 import (
+	"context"
 	"log/slog"
 	"time"
 
+	"github.com/salesforceanton/goquorum-parser/internal/protocol/messages/cryptogatemessages"
 	"github.com/salesforceanton/goquorum-parser/internal/protocol/rpc"
 	"github.com/salesforceanton/goquorum-parser/internal/transport"
 )
@@ -11,6 +13,8 @@ import (
 type MsgTransport interface {
 	Start(u *Cryptogate) error
 	Stop()
+
+	GetBalanceNative(context.Context, cryptogatemessages.BalanceNativeRequest) (cryptogatemessages.BalanceNativeResponse, error)
 }
 
 var (
@@ -42,7 +46,8 @@ func (t *Transport) Start(s *Cryptogate) error {
 	var ec rpc.ErrorsCatcher
 
 	// responders
-	// ec.Catch(rpc.CryptogateSendTransactionResponder(t, true, s.SendTransaction))
+	ec.Catch(rpc.CryptogateSendTransactionResponder(t, true, s.SendTransaction))
+	ec.Catch(rpc.CryptogateGetBalanceNativeResponder(t, true, s.GetBalanceNative))
 
 	return ec.FirstError()
 }
@@ -65,4 +70,11 @@ func (t *Transport) Timeout() time.Duration {
 
 func (t *Transport) Logger() *slog.Logger {
 	return t.logger
+}
+
+func (t *Transport) GetBalanceNative(
+	ctx context.Context,
+	req cryptogatemessages.BalanceNativeRequest,
+) (cryptogatemessages.BalanceNativeResponse, error) {
+	return rpc.CryptogateGetBalanceNativeRequester(t, ctx, req)
 }

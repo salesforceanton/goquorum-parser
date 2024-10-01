@@ -3,5 +3,6 @@ package subjects
 type Subject = string
 
 const (
-	CryptogateSendTransaction Subject = "CRYPTOGATE.transaction.send"
+	CryptogateSendTransaction  Subject = "CRYPTOGATE.transaction.send"
+	CryptogateGetBalanceNative Subject = "CRYPTOGATE.balance.native.get"
 )

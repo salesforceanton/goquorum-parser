@@ -7,6 +7,9 @@ import (
 )
 
 var (
-	CryptogateSendTransactionRequester = transport.NewRequester[cryptogatemessages.SendTransactionRequest, cryptogatemessages.SendTransactionResponse](subjects.CryptogateSendTransaction, "CryptogateSendTransaction")
-	CryptogateSendTransactionResponder = transport.NewResponder[cryptogatemessages.SendTransactionRequest, cryptogatemessages.SendTransactionResponse](subjects.CryptogateSendTransaction, "CryptogateSendTransaction")
+	CryptogateGetBalanceNativeRequester = transport.NewRequester[cryptogatemessages.BalanceNativeRequest, cryptogatemessages.BalanceNativeResponse](subjects.CryptogateSendTransaction, "CryptogateSendTransaction")
+	CryptogateGetBalanceNativeResponder = transport.NewResponder[cryptogatemessages.BalanceNativeRequest, cryptogatemessages.BalanceNativeResponse](subjects.CryptogateSendTransaction, "CryptogateSendTransaction")
+
+	CryptogateSendTransactionRequester = transport.NewRequester[cryptogatemessages.SendTransactionRequest, cryptogatemessages.SendTransactionResponse](subjects.CryptogateGetBalanceNative, "CryptogateSendTransaction")
+	CryptogateSendTransactionResponder = transport.NewResponder[cryptogatemessages.SendTransactionRequest, cryptogatemessages.SendTransactionResponse](subjects.CryptogateGetBalanceNative, "CryptogateSendTransaction")
 )

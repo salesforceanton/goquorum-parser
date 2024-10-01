@@ -43,6 +43,21 @@ func main() {
 					},
 				},
 			},
+			{
+				Name:  "test-get-balance-native",
+				Usage: "Test get balance native",
+				Action: func(c *cli.Context) {
+					address := c.String("address")
+					testGetNativeBalance(address)
+
+				},
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:  "address",
+						Usage: "wallet address",
+					},
+				},
+			},
 		}},
 	}
 

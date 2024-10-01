@@ -11,21 +11,3 @@ type SendTransactionRequest struct {
 
 type SendTransactionResponse struct {
 }
-
-type BalanceTokenRequest struct {
-	ContractAddress   string                       `json:"contractAddress"`
-	Address           string                       `json:"address"`
-	TypeSmartContract cryptogate.SmartContractType `json:"typeSmartContract"`
-}
-
-type BalanceTokenResponse struct {
-	Balance string `json:"balance"`
-}
-
-type BalanceNativeRequest struct {
-	Address string `json:"address"`
-}
-
-type BalanceNativeResponse struct {
-	Balance string `json:"balance"`
-}

@@ -150,24 +150,6 @@ func (c *Cryptogate) SendTransaction( //nolint:funlen,maintidx,gocyclo
 	return cryptogatemessages.SendTransactionResponse{}, nil //nolint:exhaustruct
 }
 
-func (c *Cryptogate) GetBalanceNative(
-	ctx context.Context,
-	req cryptogatemessages.BalanceNativeRequest,
-) (cryptogatemessages.BalanceNativeResponse, error) {
-	var result cryptogatemessages.BalanceNativeResponse
-
-	address := common.HexToAddress(req.Address)
-
-	balance, err := c.httpProvider.BalanceAt(ctx, address, nil)
-	if err != nil {
-		return cryptogatemessages.BalanceNativeResponse{}, err
-	}
-
-	result.Balance = balance.String()
-
-	return result, nil
-}
-
 func (c *Cryptogate) GetBalanceToken(
 	ctx context.Context,
 	req cryptogatemessages.BalanceTokenRequest,
