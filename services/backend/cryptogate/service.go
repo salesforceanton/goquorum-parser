@@ -5,7 +5,6 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-	"strings"
 	"time"
 
 	"sync"
@@ -34,7 +33,7 @@ type Cryptogate struct {
 	network cryptogate.Network
 
 	privateKeyServiceBackend string
-	contractAddresses        map[string]string
+	contractAddresses        map[cryptogate.SmartContractType]string
 	rpcURLs                  map[cryptogate.TypeConnection]string
 
 	deployBlock uint64
@@ -80,8 +79,14 @@ func New(
 	ex := ethereumextractor.NewExtractor(logger, rpcRequestTimeout)
 
 	// Contract addresses
-	contractAddresses := make(map[string]string)
-	//contractAddresses[cryptogate.SmartContractTypeSTBL] = viper.GetString("STBL")
+	contractAddresses := make(map[cryptogate.SmartContractType]string)
+
+	contractAddresses[cryptogate.SmartContractTypePermissionImpl] = viper.GetString("PERMISSIONS_IMPL")
+	contractAddresses[cryptogate.SmartContractTypeOrgManager] = viper.GetString("ORG_MANAGER")
+	contractAddresses[cryptogate.SmartContractTypeAccountManager] = viper.GetString("ACCOUNT_MANAGER")
+	contractAddresses[cryptogate.SmartContractTypeNodeManager] = viper.GetString("NODE_MANAGER")
+	contractAddresses[cryptogate.SmartContractTypeRoleManager] = viper.GetString("ROLE_MANAGER")
+	contractAddresses[cryptogate.SmartContractTypeVoterManager] = viper.GetString("VOTER_MANAGER")
 
 	// Set network settings here
 	network := cryptogate.Network{
@@ -94,18 +99,21 @@ func New(
 	}
 
 	// Set contracts here
-	smartContracts := []cryptogate.SmartContract{}
-
 	contractMap := &ethereumextractor.ContractMap{
 		Contracts: make(map[string]cryptogate.SmartContract),
 		Addresses: make([]common.Address, 0),
 	}
 	contractTypeMap := make(map[cryptogate.SmartContractType]cryptogate.SmartContract)
 
-	for _, contract := range smartContracts {
-		contractMap.Contracts[strings.ToLower(contract.Address)] = contract
-		contractMap.Addresses = append(contractMap.Addresses, common.HexToAddress(contract.Address))
-		contractTypeMap[contract.Type] = contract
+	for contractType, address := range contractAddresses {
+		contract := cryptogate.SmartContract{
+			Type:    contractType,
+			Address: address,
+		}
+
+		contractMap.Contracts[address] = contract
+		contractMap.Addresses = append(contractMap.Addresses, common.HexToAddress(address))
+		contractTypeMap[contractType] = contract
 	}
 
 	// cryptogate utils
