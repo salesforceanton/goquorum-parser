@@ -15,6 +15,8 @@ type MsgTransport interface {
 	Stop()
 
 	GetBalanceNative(context.Context, cryptogatemessages.BalanceNativeRequest) (cryptogatemessages.BalanceNativeResponse, error)
+	GetBalanceToken(context.Context, cryptogatemessages.BalanceTokenRequest) (cryptogatemessages.BalanceTokenResponse, error)
+	SendTransaction(context.Context, cryptogatemessages.SendTransactionRequest) (cryptogatemessages.SendTransactionResponse, error)
 }
 
 var (
@@ -48,6 +50,7 @@ func (t *Transport) Start(s *Cryptogate) error {
 	// responders
 	ec.Catch(rpc.CryptogateSendTransactionResponder(t, true, s.SendTransaction))
 	ec.Catch(rpc.CryptogateGetBalanceNativeResponder(t, true, s.GetBalanceNative))
+	ec.Catch(rpc.CryptogateGetBalanceTokenResponder(t, true, s.GetBalanceToken))
 
 	return ec.FirstError()
 }
@@ -77,4 +80,18 @@ func (t *Transport) GetBalanceNative(
 	req cryptogatemessages.BalanceNativeRequest,
 ) (cryptogatemessages.BalanceNativeResponse, error) {
 	return rpc.CryptogateGetBalanceNativeRequester(t, ctx, req)
+}
+
+func (t *Transport) GetBalanceToken(
+	ctx context.Context,
+	req cryptogatemessages.BalanceTokenRequest,
+) (cryptogatemessages.BalanceTokenResponse, error) {
+	return rpc.CryptogateGetBalanceTokenRequester(t, ctx, req)
+}
+
+func (t *Transport) SendTransaction(
+	ctx context.Context,
+	req cryptogatemessages.SendTransactionRequest,
+) (cryptogatemessages.SendTransactionResponse, error) {
+	return rpc.CryptogateSendTransactionRequester(t, ctx, req)
 }

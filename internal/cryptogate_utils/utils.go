@@ -64,7 +64,7 @@ func (c *CryptogateUtils) InitTools(
 ) (Tools, error) {
 	contract, ok := c.smartContracts[contractType]
 	if !ok {
-		return Tools{}, errors.New("smart contract not defined")
+		return Tools{}, errors.New(fmt.Sprintf("smart contract not defined - %s", contractType))
 	}
 
 	rpcClient, err := rpc.DialOptions(

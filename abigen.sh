@@ -7,9 +7,26 @@ services/backend/cryptogate/org_manager_abi
 services/backend/cryptogate/permissions_impl_abi 
 services/backend/cryptogate/role_manager_abi 
 services/backend/cryptogate/voter_manager_abi 
+services/backend/cryptogate/usdt_abi 
 )
-PACKAGES=(account_manager_abi node_manager_abi org_manager_abi permissions_impl_abi role_manager_abi voter_manager_abi)
-ABI_FILES=(account_manager.abi node_manager.abi org_manager.abi permissions_impl.abi role_manager.abi voter_manager.abi)
+PACKAGES=(
+account_manager_abi 
+node_manager_abi 
+org_manager_abi 
+permissions_impl_abi 
+role_manager_abi 
+voter_manager_abi 
+usdt_abi
+)
+ABI_FILES=(
+account_manager.abi 
+node_manager.abi 
+org_manager.abi 
+permissions_impl.abi 
+role_manager.abi 
+voter_manager.abi 
+usdt.abi
+)
 
 for ((i=0; i<${#ABI_DIRS[@]}; i++)); do
     ABI_FILE="${ABI_DIRS[$i]}/${ABI_FILES[$i]}"

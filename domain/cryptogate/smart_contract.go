@@ -6,6 +6,7 @@ import (
 	"github.com/salesforceanton/goquorum-parser/services/backend/cryptogate/org_manager_abi"
 	"github.com/salesforceanton/goquorum-parser/services/backend/cryptogate/permissions_impl_abi"
 	"github.com/salesforceanton/goquorum-parser/services/backend/cryptogate/role_manager_abi"
+	"github.com/salesforceanton/goquorum-parser/services/backend/cryptogate/usdt_abi"
 	"github.com/salesforceanton/goquorum-parser/services/backend/cryptogate/voter_manager_abi"
 )
 
@@ -23,6 +24,7 @@ const (
 	SmartContractTypeNodeManager    SmartContractType = "NODE_MANAGER"
 	SmartContractTypeRoleManager    SmartContractType = "ROLE_MANAGER"
 	SmartContractTypeVoterManager   SmartContractType = "VOTER_MANAGER"
+	SmartContractTypeUSDT           SmartContractType = "USDT"
 )
 
 func GetABI(contractType SmartContractType) string {
@@ -39,6 +41,9 @@ func GetABI(contractType SmartContractType) string {
 		return role_manager_abi.RoleManagerAbiMetaData.ABI
 	case SmartContractTypeVoterManager:
 		return voter_manager_abi.VoterManagerAbiMetaData.ABI
+	case SmartContractTypeUSDT:
+		return usdt_abi.UsdtAbiMetaData.ABI
+
 	default:
 		return ""
 	}

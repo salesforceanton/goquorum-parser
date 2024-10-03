@@ -87,6 +87,7 @@ func New(
 	contractAddresses[cryptogate.SmartContractTypeNodeManager] = viper.GetString("NODE_MANAGER")
 	contractAddresses[cryptogate.SmartContractTypeRoleManager] = viper.GetString("ROLE_MANAGER")
 	contractAddresses[cryptogate.SmartContractTypeVoterManager] = viper.GetString("VOTER_MANAGER")
+	contractAddresses[cryptogate.SmartContractTypeUSDT] = viper.GetString("USDT")
 
 	// Set network settings here
 	network := cryptogate.Network{

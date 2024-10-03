@@ -7,9 +7,12 @@ import (
 )
 
 var (
-	CryptogateGetBalanceNativeRequester = transport.NewRequester[cryptogatemessages.BalanceNativeRequest, cryptogatemessages.BalanceNativeResponse](subjects.CryptogateSendTransaction, "CryptogateSendTransaction")
-	CryptogateGetBalanceNativeResponder = transport.NewResponder[cryptogatemessages.BalanceNativeRequest, cryptogatemessages.BalanceNativeResponse](subjects.CryptogateSendTransaction, "CryptogateSendTransaction")
+	CryptogateGetBalanceNativeRequester = transport.NewRequester[cryptogatemessages.BalanceNativeRequest, cryptogatemessages.BalanceNativeResponse](subjects.CryptogateGetBalanceNative, "CryptogateGetBalanceNative")
+	CryptogateGetBalanceNativeResponder = transport.NewResponder[cryptogatemessages.BalanceNativeRequest, cryptogatemessages.BalanceNativeResponse](subjects.CryptogateGetBalanceNative, "CryptogateGetBalanceNative")
 
-	CryptogateSendTransactionRequester = transport.NewRequester[cryptogatemessages.SendTransactionRequest, cryptogatemessages.SendTransactionResponse](subjects.CryptogateGetBalanceNative, "CryptogateSendTransaction")
-	CryptogateSendTransactionResponder = transport.NewResponder[cryptogatemessages.SendTransactionRequest, cryptogatemessages.SendTransactionResponse](subjects.CryptogateGetBalanceNative, "CryptogateSendTransaction")
+	CryptogateGetBalanceTokenRequester = transport.NewRequester[cryptogatemessages.BalanceTokenRequest, cryptogatemessages.BalanceTokenResponse](subjects.CryptogateGetBalanceToken, "CryptogateGetBalanceToken")
+	CryptogateGetBalanceTokenResponder = transport.NewResponder[cryptogatemessages.BalanceTokenRequest, cryptogatemessages.BalanceTokenResponse](subjects.CryptogateGetBalanceToken, "CryptogateGetBalanceToken")
+
+	CryptogateSendTransactionRequester = transport.NewRequester[cryptogatemessages.SendTransactionRequest, cryptogatemessages.SendTransactionResponse](subjects.CryptogateSendTransaction, "CryptogateSendTransaction")
+	CryptogateSendTransactionResponder = transport.NewResponder[cryptogatemessages.SendTransactionRequest, cryptogatemessages.SendTransactionResponse](subjects.CryptogateSendTransaction, "CryptogateSendTransaction")
 )

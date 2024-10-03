@@ -7,6 +7,7 @@ type SendTransactionRequest struct {
 	NameFunction      string                       `json:"nameFunction"`
 	UserAddress       string                       `json:"userAddress"`
 	Sender            string                       `json:"sender"`
+	Amount            string                       `json:"amount"`
 }
 
 type SendTransactionResponse struct {

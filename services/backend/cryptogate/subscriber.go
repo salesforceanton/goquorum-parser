@@ -22,7 +22,8 @@ func (c *Cryptogate) parseEvent(
 			cryptogate.SmartContractTypeAccountManager,
 			cryptogate.SmartContractTypeNodeManager,
 			cryptogate.SmartContractTypeRoleManager,
-			cryptogate.SmartContractTypeVoterManager:
+			cryptogate.SmartContractTypeVoterManager,
+			cryptogate.SmartContractTypeUSDT:
 
 			preData, err := c.PrepareParseEvents(c.httpProvider, log, contract)
 			if err != nil {

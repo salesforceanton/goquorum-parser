@@ -23,13 +23,13 @@ func main() {
 	app.Commands = []cli.Command{
 		{Name: "cryptogate", Usage: "Cryptogate actions", Action: dummyAction, Subcommands: []cli.Command{
 			{
-				Name:  "test-send-transaction",
-				Usage: "Test send transaction to blockchain",
+				Name:  "test-mint-token",
+				Usage: "Test mint token",
 				Action: func(c *cli.Context) {
 					contractType := c.String("contract-type")
-					nameFunction := c.String("name-function")
+					amount := c.String("amount")
 
-					testSendTransaction(contractType, nameFunction)
+					testMintToken(contractType, amount)
 
 				},
 				Flags: []cli.Flag{
@@ -38,8 +38,34 @@ func main() {
 						Usage: "Contract type",
 					},
 					&cli.StringFlag{
-						Name:  "name-function",
-						Usage: "Name function",
+						Name:  "amount",
+						Usage: "amount",
+					},
+				},
+			},
+			{
+				Name:  "test-transfer-token",
+				Usage: "Test transfer token",
+				Action: func(c *cli.Context) {
+					contractType := c.String("contract-type")
+					userAddress := c.String("user-address")
+					amount := c.String("amount")
+
+					testTransferToken(contractType, amount, userAddress)
+
+				},
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:  "contract-type",
+						Usage: "Contract type",
+					},
+					&cli.StringFlag{
+						Name:  "user-address",
+						Usage: "user address",
+					},
+					&cli.StringFlag{
+						Name:  "amount",
+						Usage: "amount",
 					},
 				},
 			},
@@ -55,6 +81,26 @@ func main() {
 					&cli.StringFlag{
 						Name:  "address",
 						Usage: "wallet address",
+					},
+				},
+			},
+			{
+				Name:  "test-get-balance-token",
+				Usage: "Test get balance token",
+				Action: func(c *cli.Context) {
+					address := c.String("address")
+					contract := c.String("contract-type")
+
+					testGetBalanceToken(contract, address)
+				},
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:  "address",
+						Usage: "wallet address",
+					},
+					&cli.StringFlag{
+						Name:  "contract-type",
+						Usage: "Contract type",
 					},
 				},
 			},

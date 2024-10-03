@@ -3,7 +3,6 @@ package cryptogatemessages
 import "github.com/salesforceanton/goquorum-parser/domain/cryptogate"
 
 type BalanceTokenRequest struct {
-	ContractAddress   string                       `json:"contractAddress"`
 	Address           string                       `json:"address"`
 	TypeSmartContract cryptogate.SmartContractType `json:"typeSmartContract"`
 }

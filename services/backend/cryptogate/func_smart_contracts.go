@@ -14,6 +14,7 @@ import (
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/salesforceanton/goquorum-parser/domain/cryptogate"
+	"github.com/salesforceanton/goquorum-parser/internal/converters"
 	cryptogateutils "github.com/salesforceanton/goquorum-parser/internal/cryptogate_utils"
 	"github.com/salesforceanton/goquorum-parser/internal/protocol/messages/cryptogatemessages"
 )
@@ -55,13 +56,13 @@ func (c *Cryptogate) SendTransaction( //nolint:funlen,maintidx,gocyclo
 
 	gasPrice, err := tools.Provider.SuggestGasPrice(ctx)
 	if err != nil {
-		c.logger.Debug("Error with getting gas price", "err", err)
+		c.logger.Debug("Provider.SuggestGasPrice", "err", err)
 		return cryptogatemessages.SendTransactionResponse{}, err
 	}
 
 	nonce, err := tools.Provider.PendingNonceAt(ctx, sender)
 	if err != nil {
-		c.logger.Debug("Error with pending nonce", "err", err)
+		c.logger.Debug("Provider.PendingNonceAt", "err", err)
 		return cryptogatemessages.SendTransactionResponse{}, err
 	}
 
@@ -76,15 +77,39 @@ func (c *Cryptogate) SendTransaction( //nolint:funlen,maintidx,gocyclo
 
 	var data []byte
 
-	switch req.NameFunction {
-	case "somefunc":
-		data, err = contractAbi.Pack(
-			req.NameFunction,
-			common.HexToAddress(req.UserAddress),
-		)
-		if err != nil {
-			c.logger.Debug("contractAbi.Pack", "err", err)
-			return cryptogatemessages.SendTransactionResponse{}, err
+	switch req.TypeSmartContract {
+	case cryptogate.SmartContractTypeUSDT:
+		switch req.NameFunction {
+		case "issue":
+			amount, err := converters.StringToBigInt(req.Amount)
+			if err != nil {
+				c.logger.Debug("converters.StringToBigInt", "err", err)
+				return cryptogatemessages.SendTransactionResponse{}, err
+			}
+
+			data, err = contractAbi.Pack(
+				req.NameFunction,
+				amount,
+			)
+			if err != nil {
+				c.logger.Debug("contractAbi.Pack", "err", err)
+				return cryptogatemessages.SendTransactionResponse{}, err
+			}
+		case "transfer":
+			amount, err := converters.StringToBigInt(req.Amount)
+			if err != nil {
+				c.logger.Debug("converters.StringToBigInt", "err", err)
+				return cryptogatemessages.SendTransactionResponse{}, err
+			}
+			data, err = contractAbi.Pack(
+				req.NameFunction,
+				common.HexToAddress(req.UserAddress),
+				amount,
+			)
+			if err != nil {
+				c.logger.Debug("contractAbi.Pack", "err", err)
+				return cryptogatemessages.SendTransactionResponse{}, err
+			}
 		}
 	}
 
@@ -120,7 +145,7 @@ func (c *Cryptogate) SendTransaction( //nolint:funlen,maintidx,gocyclo
 	// Sign the transaction
 	signer, err := bind.NewKeyedTransactorWithChainID(privateKey, chainID)
 	if err != nil {
-		c.logger.Debug("Error with init tx signer", "err", err)
+		c.logger.Debug("bind.NewKeyedTransactorWithChainID", "err", err)
 		return cryptogatemessages.SendTransactionResponse{}, err
 	}
 
@@ -148,48 +173,6 @@ func (c *Cryptogate) SendTransaction( //nolint:funlen,maintidx,gocyclo
 	)
 
 	return cryptogatemessages.SendTransactionResponse{}, nil //nolint:exhaustruct
-}
-
-func (c *Cryptogate) GetBalanceToken(
-	ctx context.Context,
-	req cryptogatemessages.BalanceTokenRequest,
-) (cryptogatemessages.BalanceTokenResponse, error) {
-	var result cryptogatemessages.BalanceTokenResponse
-
-	tools, err := c.cryptogateUtils.InitTools(ctx, req.TypeSmartContract)
-	if err != nil {
-		return cryptogatemessages.BalanceTokenResponse{}, err
-	}
-
-	contractAddr := common.HexToAddress(req.ContractAddress)
-
-	parsedABI, err := abi.JSON(strings.NewReader(cryptogate.GetABI(tools.Contract.Type)))
-	if err != nil {
-		return cryptogatemessages.BalanceTokenResponse{}, err
-	}
-
-	balanceData, err := parsedABI.Pack("balanceOf", common.HexToAddress(req.Address))
-	if err != nil {
-		return cryptogatemessages.BalanceTokenResponse{}, err
-	}
-
-	callMsg := ethereum.CallMsg{
-		To:   &contractAddr,
-		Data: balanceData,
-	}
-
-	balance, err := tools.Provider.CallContract(ctx, callMsg, big.NewInt(int64(tools.BlockNumber)))
-	if err != nil {
-		return cryptogatemessages.BalanceTokenResponse{}, err
-	}
-
-	balanceStr, err := parsedABI.Unpack("balanceOf", balance)
-	if err != nil {
-		return cryptogatemessages.BalanceTokenResponse{}, err
-	}
-	result.Balance = balanceStr[0].(*big.Int).String()
-
-	return result, nil
 }
 
 func (c *Cryptogate) GetGasLimit(req cryptogatemessages.SendTransactionRequest,
