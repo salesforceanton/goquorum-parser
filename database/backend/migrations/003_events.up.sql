@@ -21,3 +21,5 @@ CREATE TABLE cryptogate.events (
     gas_used            TEXT,
     created_at          TIMESTAMP WITH TIME ZONE NOT NULL
 );
+
+ALTER TABLE cryptogate.events ADD CONSTRAINT events_unique_block_hash UNIQUE (height, hash)

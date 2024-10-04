@@ -42,11 +42,6 @@ func (c *Cryptogate) GetBalanceToken(
 		Data: balanceData,
 	}
 
-	c.logger.Debug("contractAddr", "add", c.contractAddresses[req.TypeSmartContract])
-	c.logger.Debug("userAddr", "add", req.Address)
-
-	c.logger.Debug("callMsg", "To", callMsg.To, "data", callMsg.Data)
-
 	balance, err := tools.Provider.CallContract(ctx, callMsg, big.NewInt(int64(tools.BlockNumber)))
 	if err != nil {
 		c.logger.Error("tools.Provider.CallContract", "err", err)

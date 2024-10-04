@@ -42,8 +42,7 @@ func GetABI(contractType SmartContractType) string {
 	case SmartContractTypeVoterManager:
 		return voter_manager_abi.VoterManagerAbiMetaData.ABI
 	case SmartContractTypeUSDT:
-		return usdt_abi.UsdtAbiMetaData.ABI
-
+		return usdt_abi.UsdtAbiABI
 	default:
 		return ""
 	}

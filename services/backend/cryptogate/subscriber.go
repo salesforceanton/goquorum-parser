@@ -34,6 +34,16 @@ func (c *Cryptogate) parseEvent(
 			if err != nil {
 				c.logger.Error(fmt.Sprintf("db.UpsertEvent: %s", err.Error()))
 			}
+
+			c.logger.Debug("event recieved",
+				"type", preData.DataEvent.Type,
+				"smart contract type", preData.DataEvent.SmartContractType,
+				"contract address", preData.DataEvent.SmartContract,
+				"from", preData.DataEvent.From,
+				"block", preData.DataEvent.Height,
+				"hash", preData.DataEvent.Hash,
+				"gasUsed", preData.DataEvent.GasUsed,
+			)
 		default:
 			c.logger.Error("Unknown contract type", "type", contract.Type)
 		}
