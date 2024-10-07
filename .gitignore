@@ -1,3 +1,4 @@
 *.env
 *.log
 node_modules
+quorum_network/config/permissions/permission-config.json
