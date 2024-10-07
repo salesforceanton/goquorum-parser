@@ -1,0 +1,23 @@
+{
+  "consensus": "qbft",
+  "chainID": 1338,
+  "blockperiod": 5,
+  "emptyBlockPeriod": 60,
+  "requestTimeout": 10,
+  "epochLength": 30000,
+  "difficulty": 1,
+  "gasLimit": "0xffff",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "maxCodeSize": 64,
+  "txnSizeLimit": 64,
+  "bootnodes": 2,
+  "validators": 3,
+  "members": 4,
+  "tesseraEnabled": true,
+  "tesseraPassword": "",
+  "accountPassword": "",
+  "quickstartDevAccounts": false,
+  "genesisNodeAllocation": "1000000000000000000000000000",
+  "prefundedAccounts": "{}",
+  "outputPath": "./output"
+}

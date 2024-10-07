@@ -13,7 +13,7 @@ services:
     command:
       [ "-js", "--http_port", "8222" ]
     networks:
-      - quorum-dev-quickstart
+      - quorum-network
 
   ##############################################
   # Databases (Postgres instances)
@@ -31,7 +31,7 @@ services:
       - POSTGRES_PASSWORD=goquorum_parser_pass
       - POSTGRES_MULTIPLE_DATABASES=backend_db
     networks:
-      - quorum-dev-quickstart
+      - quorum-network
 
 volumes:
   goquorum-parser-postgres:
@@ -40,6 +40,6 @@ volumes:
       - project=goquorum-parser
 
 networks:
-  quorum-dev-quickstart:
-    name: quorum-dev-quickstart
+  quorum-network:
+    name: quorum-network
     external: true

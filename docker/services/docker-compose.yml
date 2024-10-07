@@ -8,9 +8,9 @@ services:
     environment:
       - SERVICE_NAME=backend
     networks:
-      - quorum-dev-quickstart
+      - quorum-network
 
 networks:
-  quorum-dev-quickstart:
-    name: quorum-dev-quickstart
+  quorum-network:
+    name: quorum-network
     external: true
