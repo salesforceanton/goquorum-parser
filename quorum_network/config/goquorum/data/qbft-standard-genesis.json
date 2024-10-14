@@ -21,11 +21,12 @@
     "petersburgBlock": 0,
     "istanbulBlock": 0,
     "muirGlacierBlock": 0,
-    "berlinBlock": 0,
+    "berlinBlock": 10000000,
     "londonBlock": 0,
     "txnSizeLimit": 64,
     "arrowGlacierBlock": 0,
     "grayGlacierBlock": 0,
+    "privacyPrecompileBlock": 0,
     "qbft": {
       "epochLength": 30000,
       "blockPeriodSeconds": 5

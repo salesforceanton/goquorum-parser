@@ -53,7 +53,7 @@ x-blockscout-ref:
     - NETWORK=Quorum Network
     - SUBNETWORK=Quorum
     - CHAIN_ID=1338
-    - COIN=ETH
+    - COIN=STBL
     - ETHEREUM_JSONRPC_VARIANT=geth
     - ETHEREUM_JSONRPC_TRANSPORT=http
     - ETHEREUM_JSONRPC_HTTP_URL=http://rpcnode:8545
@@ -352,20 +352,6 @@ services:
     networks:
       quorum-network:
         ipv4_address: 172.16.239.19
-
-
-  explorer:
-    image: consensys/quorum-explorer:${QUORUM_EXPLORER_VERSION:-latest}
-    volumes:
-      - ./quorum-explorer/config.json:/app/config.json
-      - ./quorum-explorer/env:/app/.env.production
-    depends_on:
-      - rpcnode
-    ports:
-      - 25000:25000/tcp
-    networks:
-      quorum-network:
-        ipv4_address: 172.16.239.31
 
 
 
