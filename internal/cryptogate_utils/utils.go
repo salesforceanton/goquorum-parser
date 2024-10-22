@@ -2,7 +2,6 @@ package cryptogateutils
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net/http"
 
@@ -10,6 +9,8 @@ import (
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/salesforceanton/goquorum-parser/domain/cryptogate"
 )
+
+const tessera1Url = "http://localhost:9081"
 
 type Tools struct {
 	Provider    *ethclient.Client
@@ -42,20 +43,17 @@ func (c *CryptogateUtils) GetProvider(
 		return &ethclient.Client{}, fmt.Errorf("wrong connection type")
 	}
 
-	rpcClient, err := rpc.DialOptions(
-		context.Background(),
+	rpcClient, err := rpc.DialHTTPWithClient(
 		url,
-		rpc.WithHTTPClient(&http.Client{
+		&http.Client{
 			Timeout: c.rpcRequestTimeout,
-		}),
+		},
 	)
 	if err != nil {
 		return &ethclient.Client{}, err
 	}
 
-	connection := ethclient.NewClient(rpcClient)
-
-	return connection, nil
+	return ethclient.NewClient(rpcClient).WithPrivateTransactionManager(tessera1Url)
 }
 
 func (c *CryptogateUtils) InitTools(
@@ -64,21 +62,23 @@ func (c *CryptogateUtils) InitTools(
 ) (Tools, error) {
 	contract, ok := c.smartContracts[contractType]
 	if !ok {
-		return Tools{}, errors.New(fmt.Sprintf("smart contract not defined - %s", contractType))
+		return Tools{}, fmt.Errorf(fmt.Sprintf("smart contract not defined - %s", contractType))
 	}
 
-	rpcClient, err := rpc.DialOptions(
-		ctx,
+	rpcClient, err := rpc.DialHTTPWithClient(
 		c.network.Settings.RPCUrlHttp,
-		rpc.WithHTTPClient(&http.Client{
+		&http.Client{
 			Timeout: c.rpcRequestTimeout,
-		}),
+		},
 	)
 	if err != nil {
 		return Tools{}, fmt.Errorf("rpc.DialOptions: %w", err)
 	}
 
-	provider := ethclient.NewClient(rpcClient)
+	provider, err := ethclient.NewClient(rpcClient).WithPrivateTransactionManager(tessera1Url)
+	if err != nil {
+		return Tools{}, fmt.Errorf("ethclient.NewClient(rpcClient).WithPrivateTransactionManager(tessera1Url): %w", err)
+	}
 
 	blockNumber, err := provider.BlockNumber(ctx)
 	if err != nil {

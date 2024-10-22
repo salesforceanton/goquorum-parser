@@ -28,8 +28,9 @@ func main() {
 				Action: func(c *cli.Context) {
 					contractType := c.String("contract-type")
 					amount := c.String("amount")
+					isPrivate := c.Bool("private")
 
-					testMintToken(contractType, amount)
+					testMintToken(contractType, amount, isPrivate)
 
 				},
 				Flags: []cli.Flag{
@@ -40,6 +41,10 @@ func main() {
 					&cli.StringFlag{
 						Name:  "amount",
 						Usage: "amount",
+					},
+					&cli.StringFlag{
+						Name:  "private",
+						Usage: "private",
 					},
 				},
 			},

@@ -8,6 +8,8 @@ type SendTransactionRequest struct {
 	UserAddress       string                       `json:"userAddress"`
 	Sender            string                       `json:"sender"`
 	Amount            string                       `json:"amount"`
+	PrivateFor        []string                     `json:"privateFor"`
+	PrivateFrom       string                       `json:"privateFrom"`
 }
 
 type SendTransactionResponse struct {

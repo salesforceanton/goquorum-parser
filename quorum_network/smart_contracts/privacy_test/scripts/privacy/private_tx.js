@@ -4,7 +4,7 @@ const Web3 = require("web3");
 const Web3Quorum = require("web3js-quorum");
 
 // WARNING: the keys here are demo purposes ONLY. Please use a tool like EthSigner for production, rather than hard coding private keys
-const { tessera, quorum } = require("./keys.js");
+const { tessera, quorum } = require("../../../keys.js");
 const chainId = 1338;
 const privacyFlag = 0;
 
@@ -196,3 +196,5 @@ if (require.main === module) {
 }
 
 module.exports = exports = main;
+
+// 0xf5DEDEeAAa44C8f0E7C66dB9761e07bB1E848a1B

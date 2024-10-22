@@ -2,6 +2,17 @@
 // WARNING: the keys here are demo purposes ONLY. Please use a tool like EthSigner for production, rather than hard coding private keys
 
 module.exports = {
+  tessera: {
+    member1: {
+      publicKey: "ZTYLEqk5gzZ60uvLJR0zIwPCzzRoRxdyxauV+QxMMRI=",
+    },
+    member2: {
+      publicKey: "xOt7tRhG5lDBljQfAW7DC0ZDAJlBYbcFZVx4LJEo7xg=",
+    },
+    member3: {
+      publicKey: "1453wQJ/btTDFlK3DrfVdGglnuPg+RAUXBZMJVzA9Ao=",
+    },
+  },
   quorum: {
     validator1: {
       name: "validator1",

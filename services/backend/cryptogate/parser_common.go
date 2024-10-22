@@ -76,11 +76,11 @@ func (c *Cryptogate) PrepareParseEvents(
 		return PrepareParseEventsResult{}, err
 	}
 
-	gas := big.NewInt(0).SetUint64(receipt.GasUsed)
-	gasUsed := new(big.Int)
-	if receipt.EffectiveGasPrice != nil {
-		gasUsed = gasUsed.Mul(gas, receipt.EffectiveGasPrice)
-	}
+	gasUsed := big.NewInt(0).SetUint64(receipt.GasUsed)
+	// gasUsed := new(big.Int)
+	// if receipt.EffectiveGasPrice != nil {
+	// 	gasUsed = gasUsed.Mul(gas, receipt.EffectiveGasPrice)
+	// }
 
 	dataEvent := &cryptogate.Event{
 		ID:                uuid.NewString(),

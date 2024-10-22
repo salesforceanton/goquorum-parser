@@ -13,7 +13,8 @@ geth attach http://localhost:8545
 # docker compose exec ${MEMBER_NODE} /bin/sh -c "geth attach /data/geth.ipc"
 
 #eth.getPrivateTransactionReceipt("0x802b9d78080bf7045b99b6878068b34134de8d6a16a7868b8508988b6a29625e")
-#eth.getTransactionReceipt("0x802b9d78080bf7045b99b6878068b34134de8d6a16a7868b8508988b6a29625e")
+#eth.getTransactionReceipt("0x69a8fed6013c177fc9136028d704debeaca99b8dcd866e686fa01b5ccc22babf")
 
-# curl -X POST http://localhost:20000 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0x802b9d78080bf7045b99b6878068b34134de8d6a16a7868b8508988b6a29625e"]}' --header "Content-Type: application/json"
-# curl -X POST http://localhost:20002 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0x802b9d78080bf7045b99b6878068b34134de8d6a16a7868b8508988b6a29625e"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:20000 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0xe2e0fc5eea1c22e22d6581e190809916042ed955b78711db2f8fa61b1e87df93"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:20002 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0xdf08d25efb239f071c5460be7a993bdf072b863db5ce8c30c942277372dfed70"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:9081 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0xdf08d25efb239f071c5460be7a993bdf072b863db5ce8c30c942277372dfed70"]}' --header "Content-Type: application/json"

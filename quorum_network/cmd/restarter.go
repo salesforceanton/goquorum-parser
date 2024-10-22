@@ -108,15 +108,11 @@ func (r *Restarter) Stop() {
 }
 
 func (r *Restarter) initClient() error {
-	ctx, cancel := context.WithTimeout(context.Background(), httpTimeout)
-	defer cancel()
-
-	rpcClient, err := rpc.DialOptions(
-		ctx,
+	rpcClient, err := rpc.DialHTTPWithClient(
 		r.rpcUrl,
-		rpc.WithHTTPClient(&http.Client{
+		&http.Client{
 			Timeout: rpcRequestTimeout,
-		}),
+		},
 	)
 	if err != nil {
 		r.logger.Error(fmt.Sprintf("error with http connect %s", r.rpcUrl))

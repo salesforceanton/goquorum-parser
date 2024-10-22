@@ -150,15 +150,11 @@ func (ex *concreteExtractor) reconnect() error {
 	ex.lastRetry = timeutc.Now()
 
 	{
-		ctx, cancel := context.WithTimeout(context.Background(), ex.policy.HTTPTimeout)
-		defer cancel()
-
-		rpcClient, err := rpc.DialOptions(
-			ctx,
+		rpcClient, err := rpc.DialHTTPWithClient(
 			ex.httpUrl,
-			rpc.WithHTTPClient(&http.Client{
+			&http.Client{
 				Timeout: ex.rpcRequestTimeout,
-			}),
+			},
 		)
 		if err != nil {
 			ex.close()

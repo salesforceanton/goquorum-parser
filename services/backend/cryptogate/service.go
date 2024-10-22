@@ -33,6 +33,7 @@ type Cryptogate struct {
 	network cryptogate.Network
 
 	privateKeyServiceBackend string
+	ethKey                   string
 	contractAddresses        map[cryptogate.SmartContractType]string
 	rpcURLs                  map[cryptogate.TypeConnection]string
 
@@ -62,6 +63,7 @@ func New(
 	})).With("service", ServiceName)
 
 	privateKeyServiceBackend := viper.GetString("PRIVATE_KEY_SERVICE_BACKEND")
+	ethKey := viper.GetString("ETH_KEY")
 
 	// Network parameters
 	deployBlock := viper.GetUint64("DEPLOY_BLOCK")
@@ -129,6 +131,7 @@ func New(
 		client:                   client,
 		network:                  network,
 		privateKeyServiceBackend: privateKeyServiceBackend,
+		ethKey:                   ethKey,
 		httpRequestClient:        &http.Client{Timeout: defaultRequestTimeout},
 		extractor:                ex,
 		contracts:                contractMap,

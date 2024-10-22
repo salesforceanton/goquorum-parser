@@ -3,7 +3,7 @@ const fs = require('fs-extra');
 var ethers = require('ethers');
 
 // RPCNODE details
-const { tessera, quorum } = require("../keys.js");
+const { tessera, quorum } = require("../../../keys.js");
 const host = quorum.rpcnode.url;
 const accountPrivateKey = quorum.rpcnode.accountPrivateKey;
 
@@ -66,3 +66,5 @@ if (require.main === module) {
 }
 
 module.exports = exports = main
+
+// 0xeFc8Ce03811897f63882Cb9da9cc6F4Cd1beb226

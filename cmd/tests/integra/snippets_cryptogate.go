@@ -14,7 +14,13 @@ import (
 	"github.com/spf13/viper"
 )
 
-func testSendTransaction(req cryptogatemessages.SendTransactionRequest) {
+const (
+	member1tesseraPublicKey = "ZTYLEqk5gzZ60uvLJR0zIwPCzzRoRxdyxauV+QxMMRI="
+	member3tesseraPublicKey = "1453wQJ/btTDFlK3DrfVdGglnuPg+RAUXBZMJVzA9Ao="
+	gasLimit                = 47000000
+)
+
+func testSendTransaction(req cryptogatemessages.SendTransactionRequest, isPrivate bool) {
 	logger := slog.Default()
 
 	client, err := transport.New(transport.Config{
@@ -30,6 +36,12 @@ func testSendTransaction(req cryptogatemessages.SendTransactionRequest) {
 
 	transport := cryptogateservice.NewTransport(client, logger, time.Second*5)
 
+	// add only for tests
+	if isPrivate {
+		req.PrivateFor = []string{member3tesseraPublicKey}
+		req.PrivateFrom = member1tesseraPublicKey
+	}
+
 	_, err = transport.SendTransaction(context.Background(), req)
 	if err != nil {
 		fmt.Printf("err: %s\n", err.Error())
@@ -37,12 +49,12 @@ func testSendTransaction(req cryptogatemessages.SendTransactionRequest) {
 	}
 }
 
-func testMintToken(contract, amount string) {
+func testMintToken(contract, amount string, isPrivate bool) {
 	testSendTransaction(cryptogatemessages.SendTransactionRequest{
 		TypeSmartContract: cryptogate.SmartContractType(strings.ToUpper(contract)),
 		NameFunction:      "issue",
 		Amount:            amount,
-	})
+	}, isPrivate)
 }
 
 func testTransferToken(contract, amount, userAddress string) {
@@ -51,7 +63,7 @@ func testTransferToken(contract, amount, userAddress string) {
 		NameFunction:      "transfer",
 		UserAddress:       userAddress,
 		Amount:            amount,
-	})
+	}, false)
 }
 
 func testGetNativeBalance(address string) {

@@ -30,19 +30,19 @@ const (
 func GetABI(contractType SmartContractType) string {
 	switch contractType {
 	case SmartContractTypePermissionImpl:
-		return permissions_impl_abi.PermissionsImplAbiMetaData.ABI
+		return permissions_impl_abi.PermissionsImplABI
 	case SmartContractTypeOrgManager:
-		return org_manager_abi.OrgManagerAbiMetaData.ABI
+		return org_manager_abi.OrgManagerABI
 	case SmartContractTypeAccountManager:
-		return account_manager_abi.AccountManagerAbiMetaData.ABI
+		return account_manager_abi.AccountManagerABI
 	case SmartContractTypeNodeManager:
-		return node_manager_abi.NodeManagerAbiMetaData.ABI
+		return node_manager_abi.NodeManagerABI
 	case SmartContractTypeRoleManager:
-		return role_manager_abi.RoleManagerAbiMetaData.ABI
+		return role_manager_abi.RoleManagerABI
 	case SmartContractTypeVoterManager:
-		return voter_manager_abi.VoterManagerAbiMetaData.ABI
+		return voter_manager_abi.VoterManagerABI
 	case SmartContractTypeUSDT:
-		return usdt_abi.UsdtAbiABI
+		return usdt_abi.UsdtABI
 	default:
 		return ""
 	}
