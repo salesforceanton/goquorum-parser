@@ -10,7 +10,7 @@ const web3quorum = new Web3Quorum(
   { privateUrl: client.privateUrl },
   true
 );
-const contractAddress = "0xe54d2778f6fecc525f255f1c786422d115809822";
+const contractAddress = "0xebaf93b936e40dcd4f5fc78c15d01e91d09e085d";
 
 function run() {
   const filter = {

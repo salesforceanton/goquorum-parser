@@ -31,7 +31,8 @@ func (c *Cryptogate) PrepareParseEvents(
 	if err != nil {
 		c.logger.Debug(fmt.Sprintf("provider.TransactionReceipt: %s", err.Error()))
 
-		return PrepareParseEventsResult{}, err
+		// here errors with getting private txs receipts appears
+		return PrepareParseEventsResult{}, ErrWithGetTransactionReceipt
 	}
 
 	tx, _, err := provider.TransactionByHash(context.Background(), log.TxHash)

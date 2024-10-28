@@ -10,7 +10,7 @@ import (
 	"github.com/salesforceanton/goquorum-parser/domain/cryptogate"
 )
 
-const tessera1Url = "http://localhost:9081"
+const Tessera1Url = "http://member1tessera:9080"
 
 type Tools struct {
 	Provider    *ethclient.Client
@@ -53,7 +53,7 @@ func (c *CryptogateUtils) GetProvider(
 		return &ethclient.Client{}, err
 	}
 
-	return ethclient.NewClient(rpcClient).WithPrivateTransactionManager(tessera1Url)
+	return ethclient.NewClient(rpcClient).WithPrivateTransactionManager(Tessera1Url)
 }
 
 func (c *CryptogateUtils) InitTools(
@@ -75,7 +75,7 @@ func (c *CryptogateUtils) InitTools(
 		return Tools{}, fmt.Errorf("rpc.DialOptions: %w", err)
 	}
 
-	provider, err := ethclient.NewClient(rpcClient).WithPrivateTransactionManager(tessera1Url)
+	provider, err := ethclient.NewClient(rpcClient).WithPrivateTransactionManager(Tessera1Url)
 	if err != nil {
 		return Tools{}, fmt.Errorf("ethclient.NewClient(rpcClient).WithPrivateTransactionManager(tessera1Url): %w", err)
 	}

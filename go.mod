@@ -13,7 +13,7 @@ require (
 	gorm.io/gorm v1.25.12
 )
 
-replace github.com/ethereum/go-ethereum => github.com/salesforceanton/quorum/v24 v24.4.4
+replace github.com/ethereum/go-ethereum => github.com/salesforceanton/quorum/v24 v24.4.5
 
 require (
 	github.com/BurntSushi/toml v1.3.2 // indirect

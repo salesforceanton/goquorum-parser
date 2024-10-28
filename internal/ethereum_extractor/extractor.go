@@ -14,6 +14,7 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/salesforceanton/goquorum-parser/domain/cryptogate"
+	cryptogateutils "github.com/salesforceanton/goquorum-parser/internal/cryptogate_utils"
 	"github.com/salesforceanton/goquorum-parser/internal/timeutc"
 )
 
@@ -162,7 +163,7 @@ func (ex *concreteExtractor) reconnect() error {
 			return err
 		}
 
-		ex.httpClient = ethclient.NewClient(rpcClient)
+		ex.httpClient, _ = ethclient.NewClient(rpcClient).WithPrivateTransactionManager(cryptogateutils.Tessera1Url)
 		ex.logger.Debug(fmt.Sprintf("successfully connected by http to %s", ex.httpUrl))
 	}
 

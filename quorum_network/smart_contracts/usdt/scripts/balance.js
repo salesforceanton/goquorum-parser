@@ -30,7 +30,7 @@ const balanceOfABI = [
 ];
 
 // USDT token contract
-const tokenContract = "0x064f860b6683223b03b38252853d5d2c210cce19";
+const tokenContract = "0xe2889ac4b39a4d4ff9c81d372d6a682c34bda1e9";
 // A USDT token holder
 const tokenHolder = "0x064f860b6683223b03b38252853d5d2c210cce19";
 const contract = new web3.eth.Contract(balanceOfABI, tokenContract);

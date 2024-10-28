@@ -53,6 +53,7 @@ func (c *Cryptogate) SendTransaction( //nolint:funlen,maintidx,gocyclo
 	trOpts.GasLimit = gasLimit
 	trOpts.PrivateFor = req.PrivateFor
 	trOpts.PrivateFrom = req.PrivateFrom
+	trOpts.IsUsingPrivacyPrecompile = true
 
 	var transaction *types.Transaction
 
