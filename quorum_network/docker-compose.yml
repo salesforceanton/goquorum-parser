@@ -201,6 +201,22 @@ services:
       quorum-network:
         ipv4_address: 172.16.239.13
 
+  validator4:
+    << : *quorum-def
+    ports:
+      - 21006:8545/tcp
+      - 30303
+      - 9545
+    environment:
+      - GOQUORUM_CONS_ALGO=${GOQUORUM_CONS_ALGO}
+      - GOQUORUM_GENESIS_MODE=standard
+    volumes:
+      - ./config/nodes/validator4:/config/keys
+      - ./logs/quorum:/var/log/quorum/
+      - ./config/permissions:/permissions
+    networks:
+      quorum-network:
+        ipv4_address: 172.16.239.20
 
   bootnode1:
     << : *quorum-def

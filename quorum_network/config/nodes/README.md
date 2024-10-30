@@ -13,7 +13,7 @@ Once generated, the output should resemble the file structure below.
   │   └──  accountKeystore              # GoQuorum only - the account's v3 keystore
   │   └──  accountPassword              # GoQuorum only - the account's password (you would have supplied this)
   │   └──  accountPrivateKey            # GoQuorum only - the account's private key
-  │               └── ...
+  │   
   ├── validatorN                       
   │   └──  nodekey                      # the node private key
   │   └──  nodekey.pub                  # the node's public key which is used in the enode
