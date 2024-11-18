@@ -292,8 +292,8 @@ const (
 	member1tesseraPublicKey    = "ZTYLEqk5gzZ60uvLJR0zIwPCzzRoRxdyxauV+QxMMRI="
 	member3tesseraPublicKey    = "1453wQJ/btTDFlK3DrfVdGglnuPg+RAUXBZMJVzA9Ao="
 	gasLimit                   = 47000000
-	usdtContractAddressPrivate = "0xebaf93b936e40dcd4f5fc78c15d01e91d09e085d"
-	usdtContractAddressPublic  = "0xe2889ac4b39a4d4ff9c81d372d6a682c34bda1e9"
+	usdtContractAddressPrivate = "0x2cd3fDD0e7c91c656edaF094A1671729A8ce48c8"
+	usdtContractAddressPublic  = "0x4a82Fb9743c03C5fE8395F896CAeB438Ac6F7e95"
 	ptmUrl                     = "http://localhost:9081"
 	rpcUrl                     = "http://localhost:20000"
 	ethKey                     = "{\"version\":3,\"id\":\"ee96211f-182c-4ddb-ac9d-9ae69a82bfc3\",\"address\":\"111b0e42105a3412eee350a06a46edf986ce9172\",\"crypto\":{\"ciphertext\":\"0d1b72f1281d8730ada1b4035b611be40e0f74ea9a8788679701c13379e03dc0\",\"cipherparams\":{\"iv\":\"0cccf28477c3f6c7750c2bf60876c58c\"},\"cipher\":\"aes-128-ctr\",\"kdf\":\"scrypt\",\"kdfparams\":{\"dklen\":32,\"salt\":\"72992a5b3e1d18e5fc064da2d5f978dffdd9cff2ab6d1baec98cb949c1fc05a0\",\"n\":262144,\"r\":8,\"p\":1},\"mac\":\"6c581f3ecafa73a2ba60d08827845d9ecd15925cddd000e96d77b1eaf68a1c58\"}}"
