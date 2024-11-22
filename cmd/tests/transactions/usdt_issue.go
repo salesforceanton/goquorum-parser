@@ -24,7 +24,7 @@ const (
 	member2tesseraPublicKey    = "xOt7tRhG5lDBljQfAW7DC0ZDAJlBYbcFZVx4LJEo7xg="
 	member3tesseraPublicKey    = "1453wQJ/btTDFlK3DrfVdGglnuPg+RAUXBZMJVzA9Ao="
 	gasLimit                   = 47000000
-	usdtContractAddressPrivate = "0x2cd3fDD0e7c91c656edaF094A1671729A8ce48c8"
+	usdtContractAddressPrivate = "0x3a6050baa11572a72e3eef11f1c7f392d2eba285"
 	usdtContractAddressPublic  = "0x4a82Fb9743c03C5fE8395F896CAeB438Ac6F7e95"
 	ptmUrl                     = "http://localhost:9081"
 	ptm2Url                    = "http://localhost:9082"
@@ -44,8 +44,8 @@ type TxSetup struct {
 	ptmUrl string
 
 	// privacy
-	privateFrom string
-	privateFor  []string
+	// privateFrom string
+	privateFor []string
 
 	// contract
 	contractAddress string
@@ -94,7 +94,7 @@ func sendUsdtIssue(setup TxSetup) {
 		return
 	}
 
-	trOpts.PrivateFrom = setup.privateFrom
+	//trOpts.PrivateFrom = setup.privateFrom
 	trOpts.PrivateFor = setup.privateFor
 	trOpts.GasLimit = gasLimit
 	trOpts.IsUsingPrivacyPrecompile = true
@@ -205,7 +205,7 @@ func main() {
 	fmt.Println("-------------------------------PRIVATE FROM 1 to 3------------------------------------------------\n")
 
 	sendUsdtIssue(TxSetup{
-		privateFrom:     member1tesseraPublicKey,
+		//privateFrom:     member1tesseraPublicKey,
 		privateFor:      []string{member3tesseraPublicKey},
 		ptmUrl:          ptmUrl,
 		rpcUrl:          rpcUrl,
@@ -220,7 +220,7 @@ func main() {
 	fmt.Println("-------------------------------PRIVATE FROM 3 to 1------------------------------------------------\n")
 
 	sendUsdtIssue(TxSetup{
-		privateFrom:     member3tesseraPublicKey,
+		//privateFrom:     member3tesseraPublicKey,
 		privateFor:      []string{member1tesseraPublicKey},
 		ptmUrl:          ptm3Url,
 		rpcUrl:          rpcUrl3,
@@ -235,7 +235,7 @@ func main() {
 	fmt.Println("-------------------------------PRIVATE FROM 2 to 1------------------------------------------------\n")
 
 	sendUsdtIssue(TxSetup{
-		privateFrom:     member2tesseraPublicKey,
+		//privateFrom:     member2tesseraPublicKey,
 		privateFor:      []string{member1tesseraPublicKey},
 		ptmUrl:          ptm2Url,
 		rpcUrl:          rpcUrl2,

@@ -16,12 +16,12 @@ geth attach http://localhost:8545
 #eth.getTransactionReceipt("0x63d7967c0c243f09f7d6861806cdf1de9b008f63bd4b6182d9239377f56236d4")
 
 # private from 2 to 1
-# curl -X POST http://localhost:20000 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0x1c472f8dfd6d0367f531e306f69960173100ef60b61bc6a845f393790e34bd29"]}' --header "Content-Type: application/json"
-# curl -X POST http://localhost:20002 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0x1c472f8dfd6d0367f531e306f69960173100ef60b61bc6a845f393790e34bd29"]}' --header "Content-Type: application/json"
-# curl -X POST http://localhost:20004 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0x1c472f8dfd6d0367f531e306f69960173100ef60b61bc6a845f393790e34bd29"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:20000 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0x25bdfd4ba1073109e51586a7225e809d019d4713d8e153c92a2c9221295ab00f"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:20002 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0x25bdfd4ba1073109e51586a7225e809d019d4713d8e153c92a2c9221295ab00f"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:20004 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionByHash", "params": ["0x25bdfd4ba1073109e51586a7225e809d019d4713d8e153c92a2c9221295ab00f"]}' --header "Content-Type: application/json"
 
-# curl -X POST http://localhost:20000 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0x1c472f8dfd6d0367f531e306f69960173100ef60b61bc6a845f393790e34bd29"]}' --header "Content-Type: application/json"
-# curl -X POST http://localhost:20002 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0x1c472f8dfd6d0367f531e306f69960173100ef60b61bc6a845f393790e34bd29"]}' --header "Content-Type: application/json"
-# curl -X POST http://localhost:20004 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0x1c472f8dfd6d0367f531e306f69960173100ef60b61bc6a845f393790e34bd29"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:20000 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0x25bdfd4ba1073109e51586a7225e809d019d4713d8e153c92a2c9221295ab00f"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:20002 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0x25bdfd4ba1073109e51586a7225e809d019d4713d8e153c92a2c9221295ab00f"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:20004 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0x25bdfd4ba1073109e51586a7225e809d019d4713d8e153c92a2c9221295ab00f"]}' --header "Content-Type: application/json"
 
-# curl -X POST http://localhost:8545 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0x1c472f8dfd6d0367f531e306f69960173100ef60b61bc6a845f393790e34bd29"]}' --header "Content-Type: application/json"
+# curl -X POST http://localhost:8545 --data '{ "jsonrpc":"2.0", "id":2, "method":"eth_getPrivateTransactionReceipt", "params": ["0x25bdfd4ba1073109e51586a7225e809d019d4713d8e153c92a2c9221295ab00f"]}' --header "Content-Type: application/json"

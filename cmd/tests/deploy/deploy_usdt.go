@@ -30,11 +30,12 @@ type DeploySetup struct {
 	ethKey string
 	ptmUrl string
 
-	//privacy
-	privateFor  []string
-	privateFrom string
+	// privacy
+	privateFor []string
+	// privateFrom string TODO: check is this param unnecessary
 
-	//contract
+	// contract
+	name       string
 	abi        string
 	initialize []interface{}
 }
@@ -69,8 +70,10 @@ func deployContract(setup DeploySetup) {
 	trOpts.GasLimit = gasLimit
 	if isPrivate {
 		trOpts.PrivateFor = setup.privateFor
-		trOpts.PrivateFrom = setup.privateFrom
+		//trOpts.PrivateFrom = setup.privateFrom
 	}
+
+	fmt.Println("trOpts", *trOpts)
 
 	parsedAbi, err := abi.JSON(strings.NewReader(setup.abi))
 	if err != nil {
@@ -90,11 +93,12 @@ func deployContract(setup DeploySetup) {
 		return
 	}
 
-	println("contractAddress: " + address.Hex())
+	println("contractAddress: " + strings.ToLower(address.Hex()))
 }
 
 func main() {
 	setup := DeploySetup{
+		name:   "USDT",
 		rpcUrl: rpcUrl,
 		ethKey: ethKey,
 		ptmUrl: ptmUrl,
@@ -109,19 +113,17 @@ func main() {
 
 	setup.initialize = []interface{}{initialSupply, name, symbol, decimals}
 
-	fmt.Println("-------------------------------PUBLIC CONTRACT DEPLOY----------------------------------------------\n")
+	// fmt.Println("-------------------------------PUBLIC CONTRACT DEPLOY----------------------------------------------\n")
 
-	deployContract(setup)
+	// deployContract(setup)
 
-	fmt.Println("-----------------------------------------END-----------------------------------------------------\n\n")
+	// fmt.Println("-----------------------------------------END-----------------------------------------------------\n\n")
 
-	fmt.Println("-------------------------------PRIVATE CONTRACT DEPLOY---------------------------------------------\n")
+	fmt.Printf("-------------------------------CONTRACT DEPLOY: %s ---------------------------------------------\n", setup.name)
 
-	setup.privateFor = []string{member3tesseraPublicKey}
-	setup.privateFrom = member1tesseraPublicKey
+	setup.privateFor = []string{member1tesseraPublicKey}
+	//setup.privateFrom = member1tesseraPublicKey
 	deployContract(setup)
 
 	fmt.Println("-----------------------------------------END-----------------------------------------------------")
 }
-
-// 0x2cd3fDD0e7c91c656edaF094A1671729A8ce48c8

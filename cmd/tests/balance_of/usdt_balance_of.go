@@ -18,7 +18,7 @@ const (
 	member1tesseraPublicKey    = "ZTYLEqk5gzZ60uvLJR0zIwPCzzRoRxdyxauV+QxMMRI="
 	member3tesseraPublicKey    = "1453wQJ/btTDFlK3DrfVdGglnuPg+RAUXBZMJVzA9Ao="
 	gasLimit                   = 47000000
-	usdtContractAddressPrivate = "0x2cd3fDD0e7c91c656edaF094A1671729A8ce48c8"
+	usdtContractAddressPrivate = "0x3a6050baa11572a72e3eef11f1c7f392d2eba285"
 	usdtContractAddressPublic  = "0x4a82Fb9743c03C5fE8395F896CAeB438Ac6F7e95"
 	ptmUrl                     = "http://localhost:9081"
 	ptm2Url                    = "http://localhost:9082"
